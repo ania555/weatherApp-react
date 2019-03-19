@@ -1,0 +1,19 @@
+.landingPage {
+  background-image: url("../Images/totally-clear-sky.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 800px;
+}
+
+#mainIcon {
+  height: 80px;
+}
+
+#every3hours {
+  display: flex;
+  width: 100%;
+  overflow-x: scroll;
+}
+hr {
+  margin: 0px;
+}
