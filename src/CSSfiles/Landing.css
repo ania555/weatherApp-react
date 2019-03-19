@@ -2,7 +2,7 @@
   background-image: url("../Images/totally-clear-sky.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 800px;
+  height: 700px;
 }
 
 #mainIcon {
@@ -14,6 +14,33 @@
   width: 100%;
   overflow-x: scroll;
 }
+
 hr {
   margin: 0px;
+}
+
+#dailyContainer {
+}
+
+.daily {
+  display: grid;
+  grid-template-columns: 20px 130px auto 50px 10px;
+  width: 90%;
+}
+
+.dailyDay {
+  grid-column: 2;
+  justify-self: start;
+}
+
+.dailyIcon {
+  grid-column: 3;
+}
+
+.dailyTempMax {
+  grid-column: 4;
+}
+
+.dailyTempMin {
+  grid-column: 5;
 }

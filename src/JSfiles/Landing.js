@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
 import Menu from '../JSfiles/Menu';
-import Form from '../JSfiles/Form.js'
-import rain from '../Images/rain-transp.png'
-//import Header from '../JScript/Header';
-//import Carousell from '../JScript/Carousell';
+//import Form from '../JSfiles/Form.js'
+//import rain from '../Images/rain-transp.png'
 import '../CSSfiles/Landing.css';
 
 
-//const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-const myDate = new Date;
-const day = myDate.getDate();
-const myDay = myDate.getDay();
-const weekDay = weekDays[myDay];
+const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const ms = new Date().getTime() + 86400000;
+const weekDay = weekDays[new Date().getDay()];
 
 
 class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      inputValue: 'Berlin',
       data: {},
       nowTemp: null,
       nowWeather: {},
@@ -27,9 +23,12 @@ class Landing extends Component {
     };
   }
   componentDidMount() {
+    this.fetchWeather();
+  }
+  fetchWeather() {
     Promise.all([
-      fetch("https://api.openweathermap.org/data/2.5/weather?q=Berlin&units=metric&appid=0f01129677616a96d5459d7c474e647c"),
-      fetch("https://api.openweathermap.org/data/2.5/forecast?q=Berlin&units=metric&appid=0f01129677616a96d5459d7c474e647c")
+      fetch("https://api.openweathermap.org/data/2.5/weather?q=" + this.state.inputValue + "&units=metric&appid=0f01129677616a96d5459d7c474e647c"),
+      fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + this.state.inputValue + "&units=metric&appid=0f01129677616a96d5459d7c474e647c")
     ])
     .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
     .then(([json1, json2]) =>  {this.setState({ 
@@ -41,19 +40,27 @@ class Landing extends Component {
     })
       console.log(this.state.data)});
   }
+  onClick () {
+    console.log("check1")
+  }
   render() {
-    console.log(this.state.data)
     const smallList = this.state.lists.slice(0, 9);
+    const hour3list = this.state.lists.filter(list => list.dt_txt.slice(11, 16) === "03:00");
+    console.log(this.state.inputValue)
     return (
       <div className="landingPage">
       <Menu/>
-      <Form/>
-      <div>{day} {weekDay} </div>
+      <div className="form">
+				<form>
+					<input value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} type="text" name="city" placeholder="Berlin"/>
+					<button onClick={this.onClick} type="button">Go</button>
+				</form>
+			</div>
       <div>{this.state.data.name}</div>
       <div>{this.state.nowWeather.description}</div>
       <div>{this.state.nowTemp}°</div>
       <img id="mainIcon" src={this.state.nowIcon} /> 
-      
+      <div>{weekDay}</div>
       <hr></hr>
       <div id="every3hours">
         <div>
@@ -64,15 +71,32 @@ class Landing extends Component {
         {smallList.map((list, index) => (
           <div key={index}>
             <p>{list.dt_txt.slice(10, 16)}</p>
-            <img src={"http://openweathermap.org/img/w/" + list.weather[0].icon + ".png"} />
+            <img src={"http://openweathermap.org/img/w/" + list.weather[0].icon + ".png" } />
             <p>{list.main.temp.toFixed(0)}°</p>
           </div>
         ))}
       </div>
       <hr></hr> 
-        
+      <div id="dailyContainer">
+      {this.state.lists.filter(list => list.dt_txt.slice(11, 16) === "15:00")
+      .map((list, index) => (
+          <div key={index} className="daily">
+            <p className="dailyDay">{weekDays[new Date(ms + index * 86400000).getDay()]}</p>
+            {/* <p>{list.dt_txt.slice(10, 16)}</p> */}
+            <img className="dailyIcon" src={"http://openweathermap.org/img/w/" + list.weather[0].icon + ".png" } />
+            <p className="dailyTempMax">{list.main.temp_max.toFixed(0)}°</p>
+            <p className="dailyTempMin">{hour3list[index].main.temp_min.toFixed(0)}°</p>
+          </div>
+        ))} 
+      </div>
+
       </div>
     );
+  }
+  updateInputValue(evt) {
+    this.setState({
+      inputValue: evt.target.value
+    });
   }
 }
 
