@@ -1,34 +1,33 @@
 import React, { Component } from 'react';
-// import './Search.css';
+ import '../CSSfiles/Form.css';
 
 class Form extends Component {
 	constructor(props) {
     super(props);
     this.state = {
-      inputValue: ''
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  onClick = (e) => {
-    this.props.onClick(e.target.value);
-    console.log("e.target.value")
-  } 
+  handleChange(event) {
+    this.props.onCityChange(event.target.value);
+  }
+  handleSubmit(event) {
+    this.props.onSubmit(event)
+  }
 	render() {
-    console.log(this.state.inputValue)
 		return (
-			<div className="form">
+			<div className="form" onSubmit={this.handleSubmit}>
 				<form>
-					<input value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} type="text" name="city" placeholder="Berlin"/>
-					<button onClick={this.onClick} type="button">Go</button>
+					<input onChange={this.handleChange} type="text" name="city" placeholder="Berlin"/>
+					<input type="submit" value="Submit" />
 				</form>
 			</div>	
 		);
   }
-  updateInputValue(evt) {
-    this.setState({
-      inputValue: evt.target.value
-    });
-  }
+
 }
+
 
 
 

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Menu from '../JSfiles/Menu';
-//import Form from '../JSfiles/Form.js'
+import Form from '../JSfiles/Form.js'
+import Daily from '../JSfiles/Daily.js'
 //import rain from '../Images/rain-transp.png'
 import '../CSSfiles/Landing.css';
 
 
 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const ms = new Date().getTime() + 86400000;
 const weekDay = weekDays[new Date().getDay()];
 
 
@@ -22,12 +22,16 @@ class Landing extends Component {
       nowIcon: null,
       lists: []
     };
-    this.handleChange = this.handleChange.bind(this);
+    //this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCityChange = this.handleCityChange.bind(this);
   }
-  handleChange(event) {
+  handleCityChange(inputValue) {
+    this.setState({inputValue})
+  }
+  /* handleChange(event) {
     this.setState({inputValue: event.target.value});
-  }
+  } */
   handleSubmit(event) {
     alert('A name was submitted: ' + this.state.inputValue);
     this.fetchWeatherSub(this.state.inputValue);
@@ -80,55 +84,47 @@ class Landing extends Component {
     const hour3list = this.state.lists.filter(list => list.dt_txt.slice(11, 16) === "03:00");
     return (
       <div className="landingPage">
-      <Menu/>
-      <div className="form">
-				<form onSubmit={this.handleSubmit}> 
-					<input type="text" value={this.state.inputValue} onChange={this.handleChange} name="city" placeholder="City"/>
-					<input type="submit" value="Submit" />
-				</form>
-			</div>
-      <div>{this.state.data.name}</div>
-      <div>{this.state.nowWeather.description}</div>
-      <div>{this.state.nowTemp}°</div>
-      <img id="mainIcon" src={this.state.nowIcon} /> 
-      <div>{weekDay}</div>
-      <hr></hr>
-      <div id="every3hours">
-        <div>
-          <p>Now</p>
-          <img src={this.state.nowIcon} />
-          <p>{this.state.nowTemp}°</p>
+        <Menu/>
+        <Form  onCityChange={this.handleCityChange} onSubmit={this.handleSubmit} /> 
+        {/* <div className="form">
+          <form onSubmit={this.handleSubmit}> 
+            <input type="text" value={this.state.inputValue} onChange={this.handleChange} name="city" placeholder="City"/>
+            <input type="submit" value="Submit" />
+          </form>
+        </div> */}
+        <div>{this.state.data.name}</div>
+        <div>{this.state.nowWeather.description}</div>
+        <div>{this.state.nowTemp}°</div>
+        <img id="mainIcon" src={this.state.nowIcon} /> 
+        <div>{weekDay}</div>
+        <hr></hr>
+        <div id="every3hours">
+          <div>
+            <p>Now</p>
+            <img src={this.state.nowIcon} />
+            <p>{this.state.nowTemp}°</p>
+          </div>
+          {smallList.map((list, index) => (
+            <div key={index}>
+              <p>{list.dt_txt.slice(10, 16)}</p>
+              <img src={"http://openweathermap.org/img/w/" + list.weather[0].icon + ".png" } />
+              <p>{list.main.temp.toFixed(0)}°</p>
+            </div>
+          ))}
         </div>
-        {smallList.map((list, index) => (
-          <div key={index}>
-            <p>{list.dt_txt.slice(10, 16)}</p>
-            <img src={"http://openweathermap.org/img/w/" + list.weather[0].icon + ".png" } />
-            <p>{list.main.temp.toFixed(0)}°</p>
-          </div>
-        ))}
-      </div>
-      <hr></hr> 
-      <div id="dailyContainer">
-      {this.state.lists.filter(list => list.dt_txt.slice(11, 16) === "15:00")
-      .map((list, index) => (
-          <div key={index} className="daily">
-            <p className="dailyDay">{weekDays[new Date(ms + index * 86400000).getDay()]}</p>
-            {/* <p>{list.dt_txt.slice(10, 16)}</p> */}
-            <img className="dailyIcon" src={"http://openweathermap.org/img/w/" + list.weather[0].icon + ".png" } />
-            <p className="dailyTempMax">{list.main.temp_max.toFixed(0)}°</p>
-            <p className="dailyTempMin">{hour3list[index].main.temp_min.toFixed(0)}°</p>
-          </div>
-        ))} 
-      </div>
+        <hr></hr>
+        <div>
+        {this.state.lists.filter(list => list.dt_txt.slice(11, 16) === "15:00")
+        .map((list, index) => ( 
+          <Daily key={index} dayIndex= {index} icon={list.weather[0].icon} 
+              tempMax={list.main.temp_max.toFixed(0)} tempMin={hour3list[index].main.temp_min.toFixed(0)}/>   
+          ))}
+        </div>
 
       </div>
     );
   }
-  updateInputValue(evt) {
-    this.setState({
-      inputValue: evt.target.value
-    });
-  }
+  
 }
 
 export default Landing; 

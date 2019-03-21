@@ -19,9 +19,6 @@ hr {
   margin: 0px;
 }
 
-#dailyContainer {
-}
-
 .daily {
   display: grid;
   grid-template-columns: 20px 130px auto 50px 10px;
