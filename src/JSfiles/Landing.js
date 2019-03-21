@@ -15,12 +15,23 @@ class Landing extends Component {
     super(props);
     this.state = {
       error: "",
+      inputValue: "",
       data: {},
       nowTemp: null,
       nowWeather: {},
       nowIcon: null,
       lists: []
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(event) {
+    this.setState({inputValue: event.target.value});
+  }
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.inputValue);
+    this.fetchWeatherSub(this.state.inputValue);
+    event.preventDefault();
   }
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
@@ -49,6 +60,21 @@ class Landing extends Component {
     })
       console.log(this.state.data)});
   }
+  fetchWeatherSub(city) {
+    Promise.all([ 
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=0f01129677616a96d5459d7c474e647c`),
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=0f01129677616a96d5459d7c474e647c`)
+    ])
+    .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+    .then(([json1, json2]) =>  {this.setState({ 
+      data: json1,  
+      nowTemp: json1.main.temp.toFixed(0), 
+      nowWeather: json1.weather[0],
+      nowIcon: "http://openweathermap.org/img/w/" + json1.weather[0].icon + ".png",
+      lists: json2.list
+    })
+      console.log(this.state.data)});  
+  }
   render() {
     const smallList = this.state.lists.slice(0, 9);
     const hour3list = this.state.lists.filter(list => list.dt_txt.slice(11, 16) === "03:00");
@@ -56,9 +82,9 @@ class Landing extends Component {
       <div className="landingPage">
       <Menu/>
       <div className="form">
-				<form onSubmit={this.fetchWeather}> 
-					<input type="text" name="city" placeholder="Berlin"/>
-					<button type="button">Go</button>
+				<form onSubmit={this.handleSubmit}> 
+					<input type="text" value={this.state.inputValue} onChange={this.handleChange} name="city" placeholder="City"/>
+					<input type="submit" value="Submit" />
 				</form>
 			</div>
       <div>{this.state.data.name}</div>
