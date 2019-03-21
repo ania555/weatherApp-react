@@ -14,7 +14,7 @@ class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputValue: 'Berlin',
+      error: "",
       data: {},
       nowTemp: null,
       nowWeather: {},
@@ -23,12 +23,21 @@ class Landing extends Component {
     };
   }
   componentDidMount() {
-    this.fetchWeather();
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        this.fetchWeatherGeo(position.coords.latitude, position.coords.longitude);
+      },
+      error => {
+        this.setState({
+          error: 'Error Gettig Weather Condtions'
+        });
+      }
+    );  
   }
-  fetchWeather() {
-    Promise.all([
-      fetch("https://api.openweathermap.org/data/2.5/weather?q=" + this.state.inputValue + "&units=metric&appid=0f01129677616a96d5459d7c474e647c"),
-      fetch("https://api.openweathermap.org/data/2.5/forecast?q=" + this.state.inputValue + "&units=metric&appid=0f01129677616a96d5459d7c474e647c")
+  fetchWeatherGeo(lat, lon) {
+    Promise.all([ 
+      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=0f01129677616a96d5459d7c474e647c`),
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=0f01129677616a96d5459d7c474e647c`)
     ])
     .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
     .then(([json1, json2]) =>  {this.setState({ 
@@ -40,20 +49,16 @@ class Landing extends Component {
     })
       console.log(this.state.data)});
   }
-  onClick () {
-    console.log("check1")
-  }
   render() {
     const smallList = this.state.lists.slice(0, 9);
     const hour3list = this.state.lists.filter(list => list.dt_txt.slice(11, 16) === "03:00");
-    console.log(this.state.inputValue)
     return (
       <div className="landingPage">
       <Menu/>
       <div className="form">
-				<form>
-					<input value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} type="text" name="city" placeholder="Berlin"/>
-					<button onClick={this.onClick} type="button">Go</button>
+				<form onSubmit={this.fetchWeather}> 
+					<input type="text" name="city" placeholder="Berlin"/>
+					<button type="button">Go</button>
 				</form>
 			</div>
       <div>{this.state.data.name}</div>
