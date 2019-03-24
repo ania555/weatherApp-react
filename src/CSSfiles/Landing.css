@@ -1,37 +1,98 @@
 .landingPage {
-  background-image: url("../Images/totally-clear-sky.jpeg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 700px;
+  height: 640px;
+  color: white;
+  font-weight: 100;
+}
+p {
+  margin: 0;
+}
+
+img {
+  height: 47px;
+  padding: 2px 2px 2px 2px;
+}
+
+#cityName {
+  font-size: 2rem;
+  margin: 0;
+}
+
+#weatherDescr {
+  font-size: 1rem;
+  margin: 0;
+}
+
+#tempNow{
+  font-size: 6.5rem; 
+  margin-bottom: 10px;
+}
+
+#grades {
+  font-size: 3.5rem;
+  font-weight: 100;
+  margin: -70px 0 0 0;
+  position: relative;
+  bottom: 48px;
+  left: 32px; 
 }
 
 #mainIcon {
-  height: 80px;
+  height: 80px; 
+}
+
+#currentDay, .daily {
+  display: grid;
+  grid-template-columns: 20px 130px auto 45px 1px;
+  width: 90%; 
+}
+
+#currentDay {
+  margin: 0 0 10px 0;
 }
 
 #every3hours {
   display: flex;
   width: 100%;
-  overflow-x: scroll;
+  overflow-x: scroll; 
+}
+
+.hours3Hour {
+  margin-top: 8px;
+}
+
+.hours3Icon {
+  margin-top: 2px;
+}
+
+.hours3Temp {
+  margin-top: -7px;
 }
 
 hr {
-  margin: 0px;
+  margin: 0;
+  border-top: 0px;
+  border-width: 1px;
 }
 
-.daily {
-  display: grid;
-  grid-template-columns: 20px 130px auto 50px 10px;
-  width: 90%;
+#hrBottom {
+  margin-top: 8px;
 }
 
-.dailyDay {
+.dailyDay, .dailyDay1 {
   grid-column: 2;
   justify-self: start;
 }
 
+.dailyDay1 {
+  font-weight: 500 !important;
+}
+
 .dailyIcon {
   grid-column: 3;
+  position: relative;
+  bottom: 8px;
 }
 
 .dailyTempMax {
@@ -40,4 +101,11 @@ hr {
 
 .dailyTempMin {
   grid-column: 5;
+}
+
+#days {
+  margin-top: 25px;
+}
+.daily {
+ margin-bottom: -10px;
 }

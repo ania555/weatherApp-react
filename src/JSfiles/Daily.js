@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import '../CSSfiles/Landing.css';
 
 
 class Daily extends Component {
