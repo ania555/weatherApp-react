@@ -19,8 +19,8 @@ class Form extends Component {
 		return (
 			<div className="form" onSubmit={this.handleSubmit}>
 				<form>
-					<input onChange={this.handleChange} type="text" name="city" placeholder="Berlin"/>
-					<input type="submit" value="Submit" />
+					<input onChange={this.handleChange} type="text" name="city" placeholder="City"/>
+					<input type="submit" value="Go" />
 				</form>
 			</div>	
 		);

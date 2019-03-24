@@ -2,27 +2,23 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'; 
 import CheeseburgerMenu from 'cheeseburger-menu';
 import HamburgerMenu from 'react-hamburger-menu';
-
+import '../CSSfiles/Menu.css';
 
 
 
 class Menu extends Component {
     constructor(props) {
       super(props)
-  
       this.state = {
         menuOpen: false,
       }
     }
-  
     openMenu() {
       this.setState({ menuOpen: true })
     }
-  
     closeMenu() {
       this.setState({ menuOpen: false })
     }
-  
     render() {
       return <div>
         <CheeseburgerMenu
@@ -44,12 +40,15 @@ class Menu extends Component {
           height={24}
           strokeWidth={3}
           rotate={0}
-          color='black'
+          color='white'
           borderRadius={0}
           animationDuration={0.5}
         />
       </div>
     }
   }
+
+
+
   
-  export default Menu;
+export default Menu;

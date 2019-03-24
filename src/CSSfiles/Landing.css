@@ -14,6 +14,12 @@ img {
   padding: 2px 2px 2px 2px;
 }
 
+#myMenu {
+  position: relative;
+  top: 10px;
+  left: 10px;
+}
+
 #cityName {
   font-size: 2rem;
   margin: 0;
