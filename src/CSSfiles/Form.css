@@ -1,0 +1,37 @@
+#form {
+    position: relative;
+    left: 20px;
+}
+
+#cityInput {
+    position: relative;
+    bottom: 17px;
+    height: 25px;
+    border-radius: 5px;
+    border-color: transparent;
+    background-color: rgba(250, 250, 250, 0.2);
+    color:transparent;
+    font-size: 1rem;
+}
+
+#cityInput:hover, #cityInput:active {
+    background-color: gainsboro;
+    border-color: transparent;
+    border-radius: 5px;
+    color: black;
+}
+
+
+#button {
+    position: relative;
+    bottom: 16px;
+    height: 30px;
+    width: 30px; 
+    border: none; 
+    background-color: transparent;
+    color: white;
+}
+
+i {
+  font-size: 1rem; 
+}

@@ -35,13 +35,21 @@ img {
   margin-bottom: 10px;
 }
 
-#grades {
+#tempNow::before, #tempNow::after {
+  content: "°";
   font-size: 3.5rem;
   font-weight: 100;
-  margin: -70px 0 0 0;
   position: relative;
-  bottom: 48px;
-  left: 32px; 
+  bottom: 32px;
+}
+
+#tempNow::before {
+  left: 5px;
+  color: transparent;
+}
+
+#tempNow::after{
+  right: 5px;
 }
 
 #mainIcon {
@@ -50,7 +58,7 @@ img {
 
 #currentDay, .daily {
   display: grid;
-  grid-template-columns: 20px 130px auto 45px 1px;
+  grid-template-columns: 20px 140px auto 45px 1px;
   width: 90%; 
 }
 

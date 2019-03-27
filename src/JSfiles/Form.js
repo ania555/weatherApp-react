@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../CSSfiles/Landing.css';
+import '../CSSfiles/Form.css';
 
 class Form extends Component {
 	constructor(props) {
@@ -18,9 +18,9 @@ class Form extends Component {
 	render() {
 		return (
 			<div className="form" onSubmit={this.handleSubmit}>
-				<form>
-					<input onChange={this.handleChange} type="text" name="city" placeholder="City"/>
-					<input type="submit" value="Go" />
+				<form id="form">
+					<input id="cityInput" onChange={this.handleChange} type="text" name="city" placeholder=""/>
+					<button id="button" type="submit" value=""><i className="fas fa-search"></i></button>
 				</form>
 			</div>	
 		);

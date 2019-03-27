@@ -11,6 +11,7 @@ import shower from '../Images/rain3.jpg'
 import dayRain from '../Images/rain2.jpg'
 import snowDay from '../Images/snowGrey.jpg'
 import dayThunder from '../Images/thunder-day.jpg'
+import dayMist from '../Images/mist3.jpg'
 
 import nightClear from '../Images/stars-sky.jpg'
 import nightClearClouds from '../Images/night-clear-clouds.jpg'
@@ -18,14 +19,14 @@ import nightClouds from '../Images/cloudy-night1.jpg'
 import nightRain from '../Images/rain-night1.jpg'
 import nightSnow from '../Images/snow-night-vertical.jpg'
 import nightThunder from '../Images/thunder-night3.jpg'
-
+import nightMist from '../Images/mist-night1.jpg'
 import '../CSSfiles/Landing.css';
 
 
 
 const allIcons = ["01d", "01n", "02d", "02n", "03d", "03n", "04d", "04n", "09d", "09n", "10d", "10n", "11d", "11n", "13d", "13n", "50d", "50n"];
 const allBackgrounds = [sunny, nightClear, fewClouds, nightClearClouds, scatteredClouds, nightClouds, brokenClouds, nightClouds,
- shower, nightRain, dayRain, nightRain, dayThunder, nightThunder, snowDay, nightSnow];
+ shower, nightRain, dayRain, nightRain, dayThunder, nightThunder, snowDay, nightSnow, dayMist, nightMist];
 
 
 class Landing extends Component {
@@ -38,7 +39,7 @@ class Landing extends Component {
       nowTemp: null,
       todayTempMax: null,
       todayTempMin: null, 
-      nowWeather: {},
+      nowWeather: null,
       nowIcon: null,
       iconCode: "",
       lists: []
@@ -77,7 +78,7 @@ class Landing extends Component {
       nowTemp: json1.main.temp.toFixed(0),
       todayTempMax: json1.main.temp_max.toFixed(0),
       todayTempMin: json1.main.temp_min.toFixed(0),  
-      nowWeather: json1.weather[0],
+      nowWeather: json1.weather[0].description.split(' ').map(s => s[0].toUpperCase() + s.slice(1)).join(' '),
       nowIcon: "http://openweathermap.org/img/w/" + json1.weather[0].icon + ".png",
       iconCode: json1.weather[0].icon,
       lists: json2.list
@@ -95,7 +96,7 @@ class Landing extends Component {
       nowTemp: json1.main.temp.toFixed(0),
       todayTempMax: json1.main.temp_max.toFixed(0),
       todayTempMin: json1.main.temp_min.toFixed(0),  
-      nowWeather: json1.weather[0],
+      nowWeather: json1.weather[0].description.split(' ').map(s => s[0].toUpperCase() + s.slice(1)).join(' '),
       nowIcon: "http://openweathermap.org/img/w/" + json1.weather[0].icon + ".png",
       iconCode: json1.weather[0].icon,
       lists: json2.list
@@ -114,10 +115,8 @@ class Landing extends Component {
         <Form  onCityChange={this.handleCityChange} onSubmit={this.handleSubmit} /> 
         <div>
           <p id="cityName">{this.state.data.name}</p>
-          <p id="weatherDescr">{this.state.nowWeather.description}</p>
+          <p id="weatherDescr">{this.state.nowWeather}</p>
           <p id="tempNow">{this.state.nowTemp}</p>
-          <p id="grades">°</p>
-          {/* <img id="mainIcon" src={this.state.nowIcon} />  */}
         </div>
         <div id="currentDay">      
           <p className="dailyDay1">{weekDays[new Date().getDay()]}</p>
