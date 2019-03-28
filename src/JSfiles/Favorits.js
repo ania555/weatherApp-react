@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import Menu from '../JSfiles/Menu';
+import '../CSSfiles/Favorits.css';
+
+
+
 
 
 class Favorits extends Component {
 	render() {
 		return (
 			<div className="favorits">
-			<Menu/>
-				<h1>Favorite locations</h1>
+			<div className="positionMenu">
+        <Menu />
+      </div>
+			<h2>Favorite locations</h2>
+			<br></br>
 				
 			</div>	
 		);

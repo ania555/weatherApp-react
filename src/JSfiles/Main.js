@@ -2,8 +2,7 @@ import React from "react";
 import { Switch, Route } from 'react-router-dom';
 import Landing from '../JSfiles/Landing';
 import Favorits from '../JSfiles/Favorits';
-// import Login from '../JScript/Login';
-// import CreateAccount from '../JScript/CreateAccount'
+
 
 
 

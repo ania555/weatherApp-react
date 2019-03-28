@@ -109,7 +109,7 @@ class Landing extends Component {
     const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     return (
       <div className="landingPage" style={{backgroundImage: "url(" + allBackgrounds[allIcons.indexOf(this.state.iconCode)]  + ")"}}>
-        <div id="myMenu">
+        <div className="positionMenu">
           <Menu />
         </div>
         <Form  onCityChange={this.handleCityChange} onSubmit={this.handleSubmit} /> 
