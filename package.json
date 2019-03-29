@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "cheeseburger-menu": "0.0.13",
+    "local-storage": "^1.4.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-hamburger-menu": "^1.1.1",

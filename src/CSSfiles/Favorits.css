@@ -1,4 +1,12 @@
 .favorits {
-    background-color: gainsboro;
+  background-color: gainsboro;
+  min-height: 680px;
+}
+
+#locsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }
 

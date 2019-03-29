@@ -1,0 +1,35 @@
+.location {
+  height: 150px;
+  width: 90%;
+  margin-top: 10px;
+  color: white;
+  font-weight: 100; 
+}
+
+#tNow {
+  font-size: 3.5rem;
+}
+
+#cityN {
+  text-align: start;
+  font-size: 1.5rem;
+  margin: 5px 0 0 10px;
+}
+
+#tNow, #wethDesc {
+  text-align: start;
+  margin-left: 10px;
+}
+
+.detTemp {
+  position: relative;
+  bottom: 70px;
+  font-size: larger;
+}
+
+#wind {
+  position: relative;
+  bottom: 115px; 
+  left: 100px;
+  font-size: larger;
+}

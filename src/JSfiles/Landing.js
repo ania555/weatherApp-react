@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import Menu from '../JSfiles/Menu';
-import Form from '../JSfiles/Form.js'
-import Daily from '../JSfiles/Daily.js'
-import Hourly from '../JSfiles/Hourly.js'
-import sunny from '../Images/super-clear-sky.jpg'
-import fewClouds from '../Images/clearCouds2.jpg'
-import scatteredClouds from '../Images/scatter3.jpg'
-import brokenClouds from '../Images/gloomy2.jpg'
-import shower from '../Images/rain3.jpg'
-import dayRain from '../Images/rain2.jpg'
-import snowDay from '../Images/snowGrey.jpg'
-import dayThunder from '../Images/thunder-day.jpg'
-import dayMist from '../Images/mist3.jpg'
+import Form from '../JSfiles/Form.js';
+import Daily from '../JSfiles/Daily.js';
+import Hourly from '../JSfiles/Hourly.js';
+import sunny from '../Images/super-clear-sky.jpg';
+import fewClouds from '../Images/clearCouds2.jpg';
+import scatteredClouds from '../Images/scatter3.jpg';
+import brokenClouds from '../Images/gloomy2.jpg';
+import shower from '../Images/rain3.jpg';
+import dayRain from '../Images/rain5.jpg';
+import snowDay from '../Images/snowGrey.jpg';
+import dayThunder from '../Images/thunder-day.jpg';
+import dayMist from '../Images/mist3.jpg';
 
-import nightClear from '../Images/stars-sky.jpg'
-import nightClearClouds from '../Images/night-clear-clouds.jpg'
-import nightClouds from '../Images/cloudy-night1.jpg'
-import nightRain from '../Images/rain-night1.jpg'
-import nightSnow from '../Images/snow-night-vertical.jpg'
-import nightThunder from '../Images/thunder-night3.jpg'
-import nightMist from '../Images/mist-night1.jpg'
+import nightClear from '../Images/stars-sky.jpg';
+import nightClearClouds from '../Images/night-clear-clouds.jpg';
+import nightClouds from '../Images/cloudy-night1.jpg';
+import nightRain from '../Images/rain-night1.jpg';
+import nightSnow from '../Images/snow-night-vertical.jpg';
+import nightThunder from '../Images/thunder-night3.jpg';
+import nightMist from '../Images/mist-night1.jpg';
 import '../CSSfiles/Landing.css';
 
 
