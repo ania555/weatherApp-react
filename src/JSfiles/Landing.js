@@ -51,6 +51,7 @@ class Landing extends Component {
     this.setState({inputValue})
   }
   handleSubmit(event) {
+    if (this.state.inputValue == "") { alert('Not valid city'); return false}
     alert('A name was submitted: ' + this.state.inputValue);
     this.fetchWeatherSub(this.state.inputValue);
     event.preventDefault();
@@ -101,6 +102,7 @@ class Landing extends Component {
       iconCode: json1.weather[0].icon,
       lists: json2.list
     })
+    
       console.log(this.state.data)});  
   }
   render() {
