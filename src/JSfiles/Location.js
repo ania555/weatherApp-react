@@ -30,6 +30,7 @@ class Location extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      currCity: "",
       nowWeather: "",
       nowTemp: null,
       todayTempMax: null,
@@ -37,12 +38,17 @@ class Location extends Component {
       iconCode: null,
       nowWind: null 
     };
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick(event) {
+    this.props.onClick(event, this.state.currCity)
   }
   fetchWeatherSub(city) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=0f01129677616a96d5459d7c474e647c`)
     .then((res) => res.json())
     .then((json) =>  {this.setState({ 
-      data: json,  
+      data: json, 
+      currCity: json.name, 
       nowTemp: json.main.temp.toFixed(0),
       todayTempMax: json.main.temp_max.toFixed(0),
       todayTempMin: json.main.temp_min.toFixed(0),  
@@ -56,15 +62,22 @@ class Location extends Component {
   componentDidMount() {
     this.fetchWeatherSub(this.props.cityName);
   }
+  componentDidUpdate(prevProps){
+    if(prevProps.cityName !== this.props.cityName){
+      this.fetchWeatherSub(this.props.cityName);
+  }
+}
 	render() {
 		return (
-			<div className="location" style={{backgroundImage: "url(" + allBackgrounds[allIcons.indexOf(this.state.iconCode)]  + ")"}}>
+			<div className="location" onClick={this.handleClick} style={{backgroundImage: "url(" + allBackgrounds[allIcons.indexOf(this.state.iconCode)]  + ")"}}>
+      
 		    <p id="cityN">{this.props.cityName}</p>
         <p id="tNow">{this.state.nowTemp}°</p>
         <p id="wethDesc">{this.state.nowWeather}</p>
         <p className="detTemp">{this.state.todayTempMax}°</p>
         <p className="detTemp">{this.state.todayTempMin}°</p>
         <p id="wind"><i className="fas fa-wind"></i> {this.state.nowWind} m/sec</p>
+        
 			</div>	
 		);
 	}

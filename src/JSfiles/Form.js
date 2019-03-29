@@ -4,8 +4,7 @@ import '../CSSfiles/Form.css';
 class Form extends Component {
 	constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -25,7 +24,6 @@ class Form extends Component {
 			</div>	
 		);
   }
-
 }
 
 

@@ -1,4 +1,6 @@
 .location {
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 150px;
   width: 90%;
   margin-top: 10px;
