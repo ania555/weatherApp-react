@@ -51,7 +51,7 @@ class Landing extends Component {
     this.setState({inputValue})
   }
   handleSubmit(event) {
-    if (this.state.inputValue == "") { alert('Not valid city'); return false}
+    if (this.state.inputValue === "") { alert('Not valid city'); return false}
     this.fetchWeatherSub(this.state.inputValue);
     event.preventDefault();
   }
@@ -83,7 +83,7 @@ class Landing extends Component {
       iconCode: json1.weather[0].icon,
       lists: json2.list
     })
-      console.log(this.state.data)});
+      });
   }
   fetchWeatherSub(city) {
     Promise.all([ 
@@ -103,9 +103,8 @@ class Landing extends Component {
       nowIcon: "http://openweathermap.org/img/w/" + json1.weather[0].icon + ".png",
       iconCode: json1.weather[0].icon,
       lists: json2.list
-    })
-    
-      console.log(this.state.data)});  
+      })
+    });  
   }
   render() {
     const smallList = this.state.lists.slice(0, 9);

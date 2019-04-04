@@ -78,7 +78,7 @@ class Location extends Component {
   }
 	render() {
     const unvalidLocation = ls.get('unvalid');
-    if (this.state.currentCity != null && this.props.cityName.toLowerCase() != unvalidLocation.toLowerCase()) {
+    if (this.state.currentCity !== null && this.props.cityName.toLowerCase() !== unvalidLocation.toLowerCase()) {
 		return (
 			<div className="location" onClick={this.handleClick} style={{backgroundImage: "url(" + allBackgrounds[allIcons.indexOf(this.state.iconCode)]  + ")"}}>    
 		    <p id="cityN">{this.props.cityName}</p>
