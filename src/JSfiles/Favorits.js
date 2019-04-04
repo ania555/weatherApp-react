@@ -23,8 +23,7 @@ class Favorits extends Component {
     this.setState({inputValue});   
   }
   handleSubmit(event) {
-    if (this.state.inputValue == "") { alert('Not valid city'); return false}
-    alert('A name was submitted: ' + this.state.inputValue);
+    if (this.state.inputValue == "") { alert('Not valid city'); return false};
     this.state.cities.push(this.state.inputValue);
     ls.set('sessCities', JSON.stringify(this.state.cities));
     this.fetchWeatherSub(this.state.cities);

@@ -52,7 +52,6 @@ class Landing extends Component {
   }
   handleSubmit(event) {
     if (this.state.inputValue == "") { alert('Not valid city'); return false}
-    alert('A name was submitted: ' + this.state.inputValue);
     this.fetchWeatherSub(this.state.inputValue);
     event.preventDefault();
   }
@@ -91,7 +90,10 @@ class Landing extends Component {
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=0f01129677616a96d5459d7c474e647c`),
       fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=0f01129677616a96d5459d7c474e647c`)
     ])
-    .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+    .then(([res1, res2]) => {
+      if (res1.ok && res2.ok) { return Promise.all([res1.json(), res2.json()])}
+      else if (!res1.ok || !res2.ok) {alert(city + ' is not a valid city name'); window.location.reload()}
+    })
     .then(([json1, json2]) =>  {this.setState({ 
       data: json1,  
       nowTemp: json1.main.temp.toFixed(0),
