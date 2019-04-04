@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ls from 'local-storage';
 import sunny from '../Images/super-clear-sky.jpg';
 import fewClouds from '../Images/fav-clouds.jpg';
 import scatteredClouds from '../Images/scatter3.jpg';
@@ -30,7 +31,7 @@ class Location extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currCity: "",
+      currentCity: null,
       nowWeather: "",
       nowTemp: null,
       todayTempMax: null,
@@ -41,14 +42,21 @@ class Location extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
   handleClick(event) {
-    this.props.onClick(event, this.state.currCity)
+    this.props.onClick(event, this.state.currentCity)
   }
   fetchWeatherSub(city) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=0f01129677616a96d5459d7c474e647c`)
-    .then((res) => res.json())
+    .then((res) => { if (res.ok) {
+      return res.json();
+      } 
+      else if (!res.ok) { 
+        ls.set('unvalid', this.props.cityName.toString());
+        alert(this.props.cityName +' is not a valid city name')
+        throw new Error('Network response was not ok.')}
+      })
     .then((json) => {this.setState({ 
       data: json, 
-      currCity: json.name, 
+      currentCity: json.name, 
       nowTemp: json.main.temp.toFixed(0),
       todayTempMax: json.main.temp_max.toFixed(0),
       todayTempMin: json.main.temp_min.toFixed(0),  
@@ -69,6 +77,8 @@ class Location extends Component {
     } 
   }
 	render() {
+    const unvalidLocation = ls.get('unvalid');
+    if (this.state.currentCity != null && this.props.cityName.toLowerCase() != unvalidLocation.toLowerCase()) {
 		return (
 			<div className="location" onClick={this.handleClick} style={{backgroundImage: "url(" + allBackgrounds[allIcons.indexOf(this.state.iconCode)]  + ")"}}>    
 		    <p id="cityN">{this.props.cityName}</p>
@@ -78,10 +88,10 @@ class Location extends Component {
         <p className="detTemp">{this.state.todayTempMin}°</p>
         <p id="wind"><i className="fas fa-wind"></i> {this.state.nowWind} m/sec</p>        
 			</div>	
-		);
+    )}
+    else return false;
 	}
 }
-
 
 
 export default Location;

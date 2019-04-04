@@ -43,7 +43,8 @@ class Favorits extends Component {
     alert('Remove ' + this.state.currCity + " ?");
     const remCity = this.state.currCity.toLowerCase()
     const check = JSON.parse(ls.get('sessCities'));
-    const newList = check.filter(ch => ch.toLowerCase() !== remCity)
+    const unvalidLocation = ls.get('unvalid');
+    const newList = check.filter(ch => ch.toLowerCase() !== remCity).filter(ch => ch.toLowerCase() !== unvalidLocation.toLowerCase());
     this.setState({cities: newList});
     ls.remove('sessCities');
     ls.set('sessCities', JSON.stringify(newList));
@@ -52,18 +53,22 @@ class Favorits extends Component {
     //ls.clear()
     const defaultC = [];
     const savedLocations = JSON.parse(ls.get('sessCities'));
-   
-    if (savedLocations === null) {
+    const unvalidLocation = ls.get('unvalid');
+    const updatedLocations = savedLocations.filter(loc => loc.toLowerCase() !== unvalidLocation.toLowerCase());
+    ls.remove('sessCities');
+    ls.set('sessCities', JSON.stringify(updatedLocations));
+    if (updatedLocations === null) {
       this.setState({
         cities: defaultC,
       }) 
     }
     else {
       this.setState({
-        cities: savedLocations,
+        cities: updatedLocations,
       }) 
     }
-    console.log(savedLocations) 
+    console.log(savedLocations); 
+    console.log(updatedLocations);
   }
 	render() {
 		return (
