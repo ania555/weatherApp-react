@@ -60,23 +60,27 @@ class Favorits extends Component {
         cities: defaultC,
       }) 
     } 
+    if (savedLocations && !unvalidLocation) {
+      this.setState({
+        cities: savedLocations,
+      }) 
+    }
 
-
-    if (savedLocations) {
+    if (savedLocations && unvalidLocation) {
       const updatedLocations = savedLocations.filter(loc => loc.toLowerCase() !== unvalidLocation.toLowerCase());
       ls.remove('sessCities');
       ls.set('sessCities', JSON.stringify(updatedLocations));
     
-      if (updatedLocations === null) {
+/*       if (updatedLocations === null) {
         this.setState({
           cities: defaultC,
         }) 
       }
-      else {
+      else { */
         this.setState({
           cities: updatedLocations,
         }) 
-      }
+      // }
     }
   }
 	render() {
