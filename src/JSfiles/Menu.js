@@ -26,8 +26,10 @@ class Menu extends Component {
           closeCallback={this.closeMenu.bind(this)}>
             <div className="menu">
               <ul>
-                <li id="firstLink"><Link to='/' onClick={this.closeMenu} className="menu-item">Home</Link></li>
-                <li id="secondLink"><Link to='/Favorits' onClick={this.closeMenu} className="menu-item">Favorite locations</Link></li>
+{/*                 <li id="firstLink"><Link to='/' onClick={this.closeMenu} className="menu-item">Home</Link></li>
+                <li id="secondLink"><Link to='/Favorits' onClick={this.closeMenu} className="menu-item">Favorite locations</Link></li> */}
+                <li id="firstLink"><Link to={`${process.env.PUBLIC_URL}/`} onClick={this.closeMenu} className="menu-item">Home</Link></li>
+                <li id="secondLink"><Link to={`${process.env.PUBLIC_URL}/Favorits`} onClick={this.closeMenu} className="menu-item">Favorite locations</Link></li>
               </ul>
             </div>
         </CheeseburgerMenu> 
