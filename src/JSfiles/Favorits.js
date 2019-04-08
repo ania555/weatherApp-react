@@ -43,10 +43,18 @@ class Favorits extends Component {
     const remCity = this.state.currCity.toLowerCase()
     const check = JSON.parse(ls.get('sessCities'));
     const unvalidLocation = ls.get('unvalid');
-    const newList = check.filter(ch => ch.toLowerCase() !== remCity).filter(ch => ch.toLowerCase() !== unvalidLocation.toLowerCase());
-    this.setState({cities: newList});
-    ls.remove('sessCities');
-    ls.set('sessCities', JSON.stringify(newList));
+    if (!unvalidLocation) {
+      const newList = check.filter(ch => ch.toLowerCase() !== remCity)
+      this.setState({cities: newList});
+      ls.remove('sessCities');
+      ls.set('sessCities', JSON.stringify(newList));
+    }
+    if (unvalidLocation) { 
+      const newList = check.filter(ch => ch.toLowerCase() !== remCity).filter(ch => ch.toLowerCase() !== unvalidLocation.toLowerCase());
+      this.setState({cities: newList});
+      ls.remove('sessCities');
+      ls.set('sessCities', JSON.stringify(newList));
+    }
   }
   componentDidMount() {
     //ls.clear()
