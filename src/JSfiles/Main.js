@@ -12,8 +12,6 @@ function Main() {
       <Switch>
         <Route exact path='/' component={Landing}/>
         <Route path='/favorits' component={Favorits}/>
-        {/* <Route path='/login' component={Login}/> */}
-        {/* <Route path='/createAccount' component={CreateAccount}/>  */}
       </Switch>
     </main>
   );
