@@ -11,7 +11,7 @@ function Main() {
     <main>
       <Switch>
         <Route exact path='/' component={Landing}/>
-        <Route path='/favorits' component={Favorits}/>
+        <Route path='/Favorits' component={Favorits}/>
       </Switch>
     </main>
   );
