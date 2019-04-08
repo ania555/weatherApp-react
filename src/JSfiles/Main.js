@@ -10,9 +10,8 @@ function Main() {
   return (
     <main>
       <Switch>
-        {/* <Route exact path='/' component={Landing}/> */}
-        <Route exact path={`${process.env.PUBLIC_URL}/`} component={Landing}/>
-        <Route path={`${process.env.PUBLIC_URL}/Favorits`} component={Favorits}/>
+        <Route exact path='/' component={Landing}/>
+        <Route path='/Favorits' component={Favorits}/>
       </Switch>
     </main>
   );
