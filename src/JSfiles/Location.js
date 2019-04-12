@@ -72,7 +72,7 @@ class Location extends Component {
     this.fetchWeatherSub(this.props.cityName);
   }
   componentDidUpdate(prevProps) {
-    if(prevProps.cityName !== this.props.cityName){
+    if(prevProps.cityName !== this.props.cityName) {
       this.fetchWeatherSub(this.props.cityName);
     } 
   }

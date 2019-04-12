@@ -43,7 +43,8 @@ class Landing extends Component {
       nowWeather: null,
       nowIcon: null,
       iconCode: "",
-      lists: []
+      lists: [],
+      defCity: 'Berlin'
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCityChange = this.handleCityChange.bind(this);
@@ -57,19 +58,17 @@ class Landing extends Component {
     event.preventDefault();
   }
   componentDidMount() {
-    const defCity = "Berlin";
-    if (!navigator.geolocation) {this.fetchWeatherSub(defCity)} 
-    else if (navigator.geolocation) {
+    const deffCity = "london";
+    console.log(deffCity);
+ 
+    if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       position => {
         this.fetchWeatherGeo(position.coords.latitude, position.coords.longitude);
-      },
-      error => {
-        this.setState({
-          error: 'Error Gettig Weather Condtions'
-        });
-      }
-    )}  
+      })
+    } 
+     
+    this.fetchWeatherSub(this.state.defCity) 
   }
   fetchWeatherGeo(lat, lon) {
     Promise.all([ 

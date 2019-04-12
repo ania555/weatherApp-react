@@ -24,9 +24,12 @@ class Favorits extends Component {
   }
   handleSubmit(event) {
     if (this.state.inputValue === "") { alert('Not valid city'); return false};
-    this.state.cities.push(this.state.inputValue);
+    const container = this.state.cities;
+    container.push(this.state.inputValue);
+    this.setState({
+      cities: container
+    })
     ls.set('sessCities', JSON.stringify(this.state.cities));
-    this.fetchWeatherSub(this.state.cities);
     event.preventDefault();
   }
   handleClick(event, currCity) {
@@ -59,10 +62,8 @@ class Favorits extends Component {
   componentDidMount() {
     //ls.clear()
     const defaultC = [];
-    
     const savedLocations = JSON.parse(ls.get('sessCities'));
     const unvalidLocation = ls.get('unvalid');
-    
     if (!savedLocations) {
       this.setState({
         cities: defaultC,
