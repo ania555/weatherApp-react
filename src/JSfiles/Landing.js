@@ -56,8 +56,9 @@ class Landing extends Component {
     event.preventDefault();
   }
   componentDidMount() {
-    const defaultCity = "Berlin";
-    if (navigator.geolocation) {
+    const defCity = "Berlin";
+    if (!navigator.geolocation) {this.fetchWeatherSub(defCity)} 
+    else if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       position => {
         this.fetchWeatherGeo(position.coords.latitude, position.coords.longitude);
@@ -67,8 +68,7 @@ class Landing extends Component {
           error: 'Error Gettig Weather Condtions'
         });
       }
-    )} 
-    else {this.fetchWeatherSub(defaultCity)} 
+    )}  
   }
   fetchWeatherGeo(lat, lon) {
     Promise.all([ 
