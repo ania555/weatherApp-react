@@ -78,17 +78,9 @@ class Favorits extends Component {
       const updatedLocations = savedLocations.filter(loc => loc.toLowerCase() !== unvalidLocation.toLowerCase());
       ls.remove('sessCities');
       ls.set('sessCities', JSON.stringify(updatedLocations));
-    
-/*       if (updatedLocations === null) {
-        this.setState({
-          cities: defaultC,
-        }) 
-      }
-      else { */
-        this.setState({
-          cities: updatedLocations,
-        }) 
-      // }
+      this.setState({
+        cities: updatedLocations,
+      }) 
     }
   }
 	render() {

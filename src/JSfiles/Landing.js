@@ -13,6 +13,7 @@ import snowDay from '../Images/snowGrey.jpg';
 import dayThunder from '../Images/thunder-day.jpg';
 import dayMist from '../Images/mist3.jpg';
 
+
 import nightClear from '../Images/stars-sky.jpg';
 import nightClearClouds from '../Images/night-clear-clouds.jpg';
 import nightClouds from '../Images/cloudy-night1.jpg';
